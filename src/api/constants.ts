@@ -1,8 +1,6 @@
-import { OrgCourseFilterConditionType } from "./types";
+import { EliceFilterConditionsMapType } from "./types";
 
-export const ELICE_FILTER_CONDITION_MAP: {
-  [key in OrgCourseFilterConditionType]: { [key: string]: string };
-} = {
+export const ELICE_FILTER_CONDITION_MAP: EliceFilterConditionsMapType = {
   category: {
     "6": JSON.stringify({ tag_id: 12 }),
     "7": JSON.stringify({ tag_id: 13 }),
@@ -45,3 +43,19 @@ export const ELICE_FILTER_CONDITION_MAP: {
   },
   keyword: {},
 };
+
+export const DEFAULT_ELICE_FILTER_CONDITIONS = [
+  { $or: [{ status: 2 }, { status: 3 }, { status: 4 }] },
+  { is_legacy_test: true },
+  { is_datetime_enrollable: true },
+];
+
+export const ORG_COURSE_FILTER_CONDITION = [
+  "courseType", //유형
+  "format", //진행 방식
+  "category", //분야
+  "level", //난이도
+  "programmingLanguage", //언어
+  "price", //가격
+  "keyword", //검색어
+] as const;

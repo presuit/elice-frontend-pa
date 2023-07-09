@@ -1,3 +1,5 @@
+import { ORG_COURSE_FILTER_CONDITION } from "./constants";
+
 export interface OrgCourseListResponses {
   courseCount: number;
   courses: {
@@ -33,16 +35,11 @@ export type ApiFilterConditionObj = {
   [key in OrgCourseFilterConditionType]?: string[] | string;
 };
 
-export const ORG_COURSE_FILTER_CONDITION = [
-  "courseType", //유형
-  "format", //진행 방식
-  "category", //분야
-  "level", //난이도
-  "programmingLanguage", //언어
-  "price", //가격
-  "keyword", //검색어
-] as const;
 export type OrgCourseFilterConditionType =
   (typeof ORG_COURSE_FILTER_CONDITION)[number];
 
-// elice API
+export type EliceFilterConditionsMapType = {
+  [key in OrgCourseFilterConditionType]: {
+    [key: string]: string;
+  };
+};
