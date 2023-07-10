@@ -25,6 +25,6 @@ export const FILTER_NAME = [
   "스크래치",
   "무료",
   "유료",
-  //   "구독",
+  "구독",
   //   "크레딧",
 ] as const;

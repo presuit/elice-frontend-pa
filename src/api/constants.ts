@@ -38,7 +38,7 @@ export const ELICE_FILTER_CONDITION_MAP: EliceFilterConditionsMapType = {
   price: {
     "25": JSON.stringify([{ enroll_type: 0, is_free: true }]),
     "26": JSON.stringify([{ enroll_type: 0, is_free: false }]),
-    // "27": JSON.stringify({ enroll_type: 4 }),
+    "27": JSON.stringify({ enroll_type: 4 }),
     // "28": JSON.stringify({ enroll_type: 6 }),
   },
   keyword: {},
