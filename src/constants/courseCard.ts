@@ -1,0 +1,2 @@
+export const PAGINATION_MINIMUM_PAGE = 1;
+export const DEFAULT_COURSE_COUNT = 20;

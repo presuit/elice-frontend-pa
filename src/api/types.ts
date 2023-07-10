@@ -1,28 +1,33 @@
 import { ORG_COURSE_FILTER_CONDITION } from "./constants";
 
+export interface OrgCourse {
+  courseType: number;
+  tags: string[];
+  title: string;
+  short_description: string;
+  classType: number;
+  logo_file_url: null | string;
+  enrolledRolePeriod: null | string;
+  enrolledRoleBeginDatetime: number | null;
+  enrolledRoleEndDatetime: number | null;
+  beginDatetime: number;
+  endDatetime: null | number;
+  isDiscounted: boolean;
+  discountedPrice: string;
+  discountedPriceUsd: string;
+  discountRate: null | any;
+  price: string;
+  priceUsd: string;
+  enroll_type: number;
+  is_free: boolean;
+  image_file_url: string | null;
+  taglist: string[];
+  id: number;
+}
+
 export interface OrgCourseListResponses {
-  courseCount: number;
-  courses: {
-    courseType: number;
-    tags: string[];
-    title: string;
-    shortDescription: string;
-    classType: number;
-    logoFileUrl: null | string;
-    enrolledRolePeriod: null | string;
-    enrolledRoleBeginDatetime: number | null;
-    enrolledRoleEndDatetime: number | null;
-    beginDatetime: number;
-    endDatetime: null | number;
-    isDiscounted: boolean;
-    discountedPrice: string;
-    discountedPriceUsd: string;
-    discountRate: null | any;
-    price: string;
-    priceUsd: string;
-    enrollType: number;
-    isFree: boolean;
-  }[];
+  course_count: number;
+  courses: OrgCourse[];
 }
 
 export interface GetOrgCourseListParams {
