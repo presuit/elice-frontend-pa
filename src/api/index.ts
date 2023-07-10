@@ -1,7 +1,9 @@
 import axios from "axios";
 import { GetOrgCourseListParams, OrgCourseListResponses } from "./types";
 
-export const instance = axios.create({});
+export const instance = axios.create({
+  baseURL: "http://localhost:3000",
+});
 export const apiInstance = axios.create({
   baseURL: process.env.API_INSTANCE_BASE_URL,
 });
