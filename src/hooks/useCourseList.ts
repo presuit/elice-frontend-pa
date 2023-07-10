@@ -1,20 +1,22 @@
 import { OrgCourseList } from "@/api";
 import { DEFAULT_COURSE_COUNT } from "@/constants/courseCard";
 import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
 
-export function useCourseList(page: number) {
-  const router = useRouter();
+interface IProps {
+  page: number;
+  filterConditions: ParsedUrlQuery;
+}
 
-  return useQuery(["course", "list", router.query, page], {
-    queryFn: ({ queryKey }) => {
-      console.log(queryKey);
-      return OrgCourseList.getOrgCourseList({
+export function useCourseList({ page, filterConditions }: IProps) {
+  return useQuery(["course", "list", filterConditions, page], {
+    queryFn: () =>
+      OrgCourseList.getOrgCourseList({
         count: DEFAULT_COURSE_COUNT,
         offset: (page - 1) * DEFAULT_COURSE_COUNT,
-        filter_conditions: JSON.stringify(router.query),
-      });
-    },
+        filter_conditions: JSON.stringify(filterConditions),
+      }),
     keepPreviousData: true,
+    suspense: true,
   });
 }
