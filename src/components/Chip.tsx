@@ -1,7 +1,7 @@
 import { OrgCourseFilterConditionType } from "@/api/types";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IProps {
   id: string;
@@ -35,19 +35,17 @@ export default function Chip({ id, name, filterCondition }: IProps) {
     router.replace(url);
   }
 
-  useLayoutEffect(() => {
-    if (filterCondition) {
-      const queryValues = router.query[filterCondition];
+  useEffect(() => {
+    const queryValues = router.query[filterCondition];
 
-      if (queryValues) {
-        if (Array.isArray(queryValues)) {
-          setActive(queryValues.includes(id));
-        } else {
-          setActive(queryValues === id);
-        }
+    if (queryValues) {
+      if (Array.isArray(queryValues)) {
+        setActive(queryValues.includes(id));
       } else {
-        setActive(false);
+        setActive(queryValues === id);
       }
+    } else {
+      setActive(false);
     }
   }, [router.query, filterCondition, id]);
 
@@ -56,8 +54,9 @@ export default function Chip({ id, name, filterCondition }: IProps) {
       id={id}
       name={name}
       className={classNames(
-        "m-2 py-1 px-3 bg-main-background border border-main-background text-sm rounded-[1.875rem] transition-colors",
-        { "bg-indigo-500 text-white": active }
+        "m-2 py-1 px-3 border border-main-background text-sm rounded-[1.875rem] transition-colors",
+        { "bg-indigo-500 text-white": active },
+        { "bg-main-background": !active }
       )}
       onClick={handleClickChip}
     >
