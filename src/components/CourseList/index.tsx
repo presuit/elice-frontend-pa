@@ -1,37 +1,30 @@
 import { useCourseList } from "@/hooks/useCourseList";
 import CourseCard from "./CourseCard";
 import { useEffect, useState } from "react";
-import Pagination from "../Pagination";
+import Pagination from "./Pagination";
 import {
   DEFAULT_COURSE_COUNT,
   PAGINATION_MINIMUM_PAGE,
 } from "@/constants/courseCard";
 import { useRouter } from "next/router";
 import usePageTriggerScroll from "@/hooks/usePageTriggerScroll";
+import NotFound from "./NotFound";
 
 export default function CourseList() {
   const [page, setPage] = useState(PAGINATION_MINIMUM_PAGE);
   const router = useRouter();
   const scrollRef = usePageTriggerScroll(page);
-  const { isLoading, data } = useCourseList(page);
+  const { data } = useCourseList({
+    page,
+    filterConditions: router.query,
+  });
 
   useEffect(() => {
     setPage(PAGINATION_MINIMUM_PAGE);
   }, [router.query]);
 
-  if (isLoading) {
-    return <></>;
-  }
-
   if (!data || data.course_count === 0 || data.courses.length === 0) {
-    return (
-      <div className="flex flex-col justify-center items-center py-32 gap-5">
-        <img src="/images/notFound.png" alt="notFound" width={64} height={64} />
-        <span className="text-lg font-medium text-zinc-500">
-          검색 결과가 없습니다.
-        </span>
-      </div>
-    );
+    return <NotFound />;
   }
 
   return (
