@@ -7,17 +7,17 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let eliceFilterConditions = null;
   const { offset, count, filter_conditions } = req.query;
   const isFilterExists =
     filter_conditions && typeof filter_conditions === "string";
-  let eliceFilterConditions = null;
 
   if (isFilterExists) {
     eliceFilterConditions = getEliceFilterConditions(filter_conditions);
   }
 
   try {
-    const { data } = await apiInstance.get<OrgCourseListResponses>(
+    const { data, status } = await apiInstance.get<OrgCourseListResponses>(
       "/org/academy/course/list",
       {
         params: {
@@ -30,7 +30,7 @@ export default async function handler(
       }
     );
 
-    return res.status(200).json(data);
+    return res.status(status).json(data);
   } catch (error) {
     console.log(error);
     return res.status(400).json(error);
