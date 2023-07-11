@@ -9,6 +9,7 @@ module.exports = {
         'filtering-title-background': 'rgb(249, 250, 252)',
         'filtering-title-border': 'rgb(225, 226, 228)',
         'filtering-title-text': '#5e5f61',
+        'elice-purple': '#524fa1',
       },
     },
   },

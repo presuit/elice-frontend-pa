@@ -13,7 +13,7 @@ export default function SearchInput() {
   }, 300)
 
   return (
-    <div className="my-3 flex items-center overflow-hidden rounded border border-input-background bg-white">
+    <div className="my-3 flex items-center overflow-hidden rounded border border-input-background bg-white transition-colors focus-within:border-elice-purple">
       <IcoSearch classname="mx-4" />
       <input
         type="text"

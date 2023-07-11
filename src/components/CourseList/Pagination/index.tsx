@@ -37,7 +37,7 @@ function renderPages({ maxPage, page, setPage }: Props) {
           {page}
         </button>
       ))}
-      <button className={classNames(BUTTON_BASE_STYLE, 'bg-[#524fa1] text-white')}>{page}</button>
+      <button className={classNames(BUTTON_BASE_STYLE, 'bg-elice-purple text-white')}>{page}</button>
       {rightPages.map(page => (
         <button key={page} id={`${page}`} name={`${page}`} className={classNames(BUTTON_BASE_STYLE, 'text-[#999]')} onClick={() => setPage(page)}>
           {page}

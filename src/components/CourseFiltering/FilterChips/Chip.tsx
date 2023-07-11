@@ -53,7 +53,7 @@ export default function Chip({ id, name, filterCondition }: Props) {
       name={name}
       className={classNames(
         'm-2 rounded-[1.875rem] border border-main-background px-3 py-1 text-sm transition-colors',
-        { 'bg-indigo-500 text-white': active },
+        { 'bg-elice-purple text-white': active },
         { 'bg-main-background': !active },
       )}
       onClick={handleClickChip}

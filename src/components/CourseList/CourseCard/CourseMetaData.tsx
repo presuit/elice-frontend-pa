@@ -9,10 +9,10 @@ export default function CourseMetaData({ shortDescription, title, enrollType, is
   function renderLabel() {
     return (
       <>
-        {enrollType === 0 && isFree && <span className="text-xs font-bold text-[#524fa1]">무료</span>}
-        {enrollType === 0 && !isFree && <span className="text-xs font-bold text-[#524fa1]">유료</span>}
-        {enrollType === 4 && <span className="text-xs font-bold text-[#524fa1]">구독</span>}
-        {enrollType === 5 && <span className="text-xs font-bold text-[#524fa1]">관리자 등록</span>}
+        {enrollType === 0 && isFree && <span className="text-xs font-bold text-elice-purple">무료</span>}
+        {enrollType === 0 && !isFree && <span className="text-xs font-bold text-elice-purple">유료</span>}
+        {enrollType === 4 && <span className="text-xs font-bold text-elice-purple">구독</span>}
+        {enrollType === 5 && <span className="text-xs font-bold text-elice-purple">관리자 등록</span>}
       </>
     )
   }
