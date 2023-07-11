@@ -104,7 +104,14 @@ $ yarn dev
 
 ### 유의사항
 
-<img width="522" alt="image" src="https://github.com/presuit/elice-frontend-pa/assets/28239963/e03ac99d-358e-456e-83ed-d1e5bfcf4717">
+<table>
+  <tr>
+    <td valign="top"><img  width="522" alt="image" src="https://github.com/presuit/elice-frontend-pa/assets/28239963/e03ac99d-358e-456e-83ed-d1e5bfcf4717">
+</td>
+    <td valign="top"><img  width="323" alt="image" src="https://github.com/presuit/elice-frontend-pa/assets/28239963/0b877c26-3eb2-4059-9ad3-618085a8a416">
+</td>
+  </tr>
+</table>
 
 - Label의 역할과 과제 스크린샷에 보이는 Course Card 컴포넌트의 최하단 가격부분의 내용이 동일하여 이부분 주의해서 봐주시면 감사하겠습니다.
 - 가격은 구현 목록에는 없었지만, 컴포넌트의 완성도를 높이기 위해 추가해보았습니다.
@@ -112,28 +119,30 @@ $ yarn dev
 ## Next.js의 API Roues 기능 활용하여 middleware API 서버 구현
 
 - Next.js의 API Routes 기능을 활용하여 `/api/course/list` URL로 접근하면 엘카데미 코스 리스트 정보를 불러오는 `https://api-rest.elice.io/org/academy/course/list/` 에 요청하여 정보를 가져오는 로직 구현했습니다.
-- CORS 구현을 위해 cors 라이브러리를 활용하여 middleware API 서버로 접근하는 방식중 `GET` 방식만 받을 수 있도록 설정했습니다.
+- CORS 구현을 위해 [cors](https://github.com/expressjs/cors#readme) 라이브러리를 활용하여 middleware API 서버로 접근하는 방식중 `GET` 방식만 받을 수 있도록 설정했습니다.
 
 ## 비동기 상태 처리를 위한 리액트 쿼리 사용
 
-- 서버에서 가져오는 데이터와 프론트엔드에서 사용하는 데이터를 구분하기 위해 리액트 쿼리를 사용.
-- 리액트 쿼리에서 제공하는 데이터 캐싱 기능을 활용하여 받아온 course 데이터는 1분동안 fresh한 상태를 유지할 수 있도록 함(staleTime: 60_000)
+- 서버에서 가져오는 데이터와 프론트엔드에서 사용하는 데이터를 구분하기 위해 리액트 쿼리를 사용했습니다.
+- 리액트 쿼리에서 제공하는 데이터 캐싱 기능을 활용하여 받아온 course 데이터는 1분동안 fresh한 상태를 유지할 수 있도록 했습니다.(default staleTime: 60_000)
 
-## GetServerSideProps를 통한 SSR 활용
+## getServerSideProps를 통한 SSR 활용
 
-- Next.js에서 페이지별 렌더링 방식을 달리 줄 수 있는데, 과제를 진행하면서 getServerSideProps 함수를 활용하여 서버에서 URL에 담긴 SearchParams를 보고 데이터를 미리 fetch 할 수 있으면 좋을 것 같다고 판단하여 진행함.
+- Next.js에서 페이지별 렌더링 방식을 달리 줄 수 있는데, 과제를 진행하면서 getServerSideProps 함수를 활용하여 서버에서 URL에 담긴 SearchParams를 보고 데이터를 미리 fetch 할 수 있으면 좋을 것 같다고 판단하여 진행했습니다.
 - 좋다고 생각한 근거는 다음과 같습니다.
-  1. SSR을 통해 HTML에 Course Card 들의 정보를 담을 수 있기 때문에 SEO 측면에서 유리함.
-  2. 서버에서 URL에 해당하는 course 데이터를 미리 패치하기 때문에 클라이언트 측에서 로딩 없이 바로 course card 들을 볼 수 있음.
+  1. SSR을 통해 HTML에 Course Card 들의 정보를 담을 수 있기 때문에 SEO 측면에서 유리하다고 생각했습니다.
+  2. 서버에서 URL에 해당하는 Course 데이터를 미리 fetch 하기 때문에 클라이언트 측에서 로딩 없이 바로 Course Card 들을 볼 수 있음.
 - 데이터를 패치한 방식은 리액트 쿼리에서 지원하는 hydration 방식을 사용했습니다.
 
 ## eslint, prettier 적용 및 추가 플러그인 사용
 
 - eslint, prettier를 통해 코드 작성의 일관성을 지키면서 발생할 수 있는 에러를 미리 디버깅 할 수 있도록 처리했습니다.
-- eslint에 다양한 플러그인이 존재하는데, 이 중에 prettier와 eslint를 함께 쓸 수 있도록 도와주는 플러그인과, import 문의 순서를 정할 수 있는 플러그인을 사용했습니다.
-- tailwindcss에서 제공하는 prettier 플러그인이 존재하여 이또한 적용시켰습니다.(자동으로 className에 들어간 요소들을 규칙에 맞게 정리해줍니다.)
+- eslint에 다양한 플러그인이 존재하는데, 이 중에 [prettier와 eslint를 함께 쓸 수 있도록 도와주는 플러그인](https://github.com/prettier/eslint-config-prettier)과 [eslint 규칙에 맞게 prettier를 적용할 수 있는 플러그인](https://github.com/prettier/eslint-plugin-prettier), [import 문의 순서를 정할 수 있는 플러그인](https://github.com/import-js/eslint-plugin-import)을 사용했습니다.
+- [tailwindcss에서 제공하는 prettier 플러그인](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)이 존재하여 이또한 적용시켰습니다.(자동으로 className에 들어간 요소들을 규칙에 맞게 정리해줍니다.)
 
 ## 웹 접근성을 준수하여 UI 개발
+
+<img width="790" alt="스크린샷 2023-07-11 22 40 21" src="https://github.com/presuit/elice-frontend-pa/assets/28239963/6a813729-373b-4f9b-a223-8eae702dd6f2">
 
 - section 태그가 붙으면 heading 태그가 붙어야 하기 때문에 heading 태그를 쓰면서 스크린 리더기에서만 읽힐 수 있도록 처리했습니다.
 - 페이지 내에서 heading 태그가 꼬이지 않고, 순차적으로 쓸 수 있도록 처리했습니다.
