@@ -1,6 +1,7 @@
 import { ORG_COURSE_FILTER_CONDITION } from "./constants";
 
 export interface OrgCourse {
+  id: number;
   courseType: number;
   tags: string[];
   title: string;
@@ -22,12 +23,25 @@ export interface OrgCourse {
   is_free: boolean;
   image_file_url: string | null;
   taglist: string[];
-  id: number;
 }
 
 export interface OrgCourseListResponses {
   course_count: number;
   courses: OrgCourse[];
+}
+
+export interface OrgCourseListErrorResponses {
+  _result: {
+    status: string;
+    reason: string;
+  };
+  fail_code: string;
+  fail_message: string;
+  fail_detail: {
+    invalid_params: {
+      offset: string;
+    };
+  };
 }
 
 export interface GetOrgCourseListParams {

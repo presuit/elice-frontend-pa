@@ -9,12 +9,13 @@ import {
 import { useRouter } from "next/router";
 import usePageTriggerScroll from "@/hooks/usePageTriggerScroll";
 import NotFound from "./NotFound";
+import { isOrgCourseErrorResponses } from "@/api/utils";
 
 export default function CourseList() {
   const [page, setPage] = useState(PAGINATION_MINIMUM_PAGE);
   const router = useRouter();
   const scrollRef = usePageTriggerScroll(page);
-  const { data, isLoading } = useCourseList({
+  const { data, isLoading, error } = useCourseList({
     page,
     filterConditions: router.query,
   });
@@ -27,8 +28,16 @@ export default function CourseList() {
     return <></>;
   }
 
-  if (!data || data.course_count === 0 || data.courses.length === 0) {
-    return <NotFound />;
+  if (error || !data) {
+    return <NotFound cause={"에러가 발생했습니다: Internal Server Error"} />;
+  }
+
+  if (isOrgCourseErrorResponses(data)) {
+    return <NotFound cause={`에러가 발생했습니다: ${data.fail_message}`} />;
+  }
+
+  if (data.course_count === 0 || data.courses.length === 0) {
+    return <NotFound cause="검색 결과가 없습니다." />;
   }
 
   return (
