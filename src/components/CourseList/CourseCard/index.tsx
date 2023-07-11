@@ -3,7 +3,6 @@ import CourseMetaDataWithIcons from './CourseMetaDataWithIcons'
 import PriceLabel from './PriceLabel'
 
 interface Props {
-  taglist: string[]
   title: string
   shortDescription: string
   logoFileUrl: string | null
@@ -11,11 +10,11 @@ interface Props {
   isFree: boolean
 }
 
-export default function CourseCard({ enrollType, isFree, logoFileUrl, shortDescription, taglist, title }: Props) {
+export default function CourseCard({ enrollType, isFree, logoFileUrl, shortDescription, title }: Props) {
   return (
     <div className="flex h-[338px] w-full flex-col justify-between overflow-hidden rounded-lg bg-white px-6 py-7">
       <div>
-        <CourseMetaData title={title} shortDescription={shortDescription} taglist={taglist} />
+        <CourseMetaData title={title} shortDescription={shortDescription} enrollType={enrollType} isFree={isFree} />
         <CourseMetaDataWithIcons logoFileUrl={logoFileUrl} />
       </div>
       <div>

@@ -51,7 +51,6 @@ export default function CourseList() {
                 isFree={course.is_free}
                 logoFileUrl={course.logo_file_url}
                 shortDescription={course.short_description}
-                taglist={course.taglist}
                 title={course.title}
               />
             </a>

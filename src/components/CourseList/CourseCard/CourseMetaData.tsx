@@ -1,7 +1,25 @@
-export default function CourseMetaData({ shortDescription, taglist, title }: { taglist: string[]; title: string; shortDescription: string }) {
+interface Props {
+  enrollType: number
+  isFree: boolean
+  title: string
+  shortDescription: string
+}
+
+export default function CourseMetaData({ shortDescription, title, enrollType, isFree }: Props) {
+  function renderLabel() {
+    return (
+      <>
+        {enrollType === 0 && isFree && <span className="text-xs font-bold text-[#524fa1]">무료</span>}
+        {enrollType === 0 && !isFree && <span className="text-xs font-bold text-[#524fa1]">유료</span>}
+        {enrollType === 4 && <span className="text-xs font-bold text-[#524fa1]">구독</span>}
+        {enrollType === 5 && <span className="text-xs font-bold text-[#524fa1]">관리자 등록</span>}
+      </>
+    )
+  }
+
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs font-bold text-[#524fa1]">{taglist.length > 0 ? taglist[0] : '미설정'}</span>
+      {renderLabel()}
       <h4
         style={{
           display: '-webkit-box',
