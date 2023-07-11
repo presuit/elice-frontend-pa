@@ -8,7 +8,7 @@ import { DEFAULT_COURSE_COUNT } from '@/constants/courseCard'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-main-background">
+    <div className="min-h-screen bg-elice-white">
       <main className="mx-auto w-full max-w-7xl p-6">
         {/* filtering */}
         <section>

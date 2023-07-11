@@ -52,9 +52,9 @@ export default function Chip({ id, name, filterCondition }: Props) {
       id={id}
       name={name}
       className={classNames(
-        'm-2 rounded-[1.875rem] border border-main-background px-3 py-1 text-sm transition-colors',
+        'm-2 rounded-[1.875rem] border border-elice-white px-3 py-1 text-sm transition-colors',
         { 'bg-elice-purple text-white': active },
-        { 'bg-main-background': !active },
+        { 'bg-elice-white': !active },
       )}
       onClick={handleClickChip}
     >

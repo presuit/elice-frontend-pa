@@ -5,7 +5,7 @@ interface Props {
 
 export default function PriceLabel({ enrollType, isFree }: Props) {
   return (
-    <div className="border-t border-main-background pt-4">
+    <div className="border-t border-elice-white pt-4">
       <>
         {enrollType === 0 && isFree && <span className="font-bold text-[#00ab53]">무료</span>}
         {enrollType === 0 && !isFree && <span className="font-bold text-elice-purple">유료</span>}

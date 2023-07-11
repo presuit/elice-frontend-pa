@@ -36,7 +36,7 @@ export default function CourseMetaData({ shortDescription, title, enrollType, is
           WebkitLineClamp: 2,
           WebkitBoxOrient: 'vertical',
         }}
-        className="overflow-hidden text-sm leading-[1.6] text-[#5e5f61]"
+        className="overflow-hidden text-sm leading-[1.6] text-elice-gray"
       >
         {shortDescription}
       </p>
