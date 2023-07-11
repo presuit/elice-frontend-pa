@@ -1,6 +1,6 @@
 import { debounce } from 'lodash-es'
 import { useRouter } from 'next/router'
-import IcoSearch from './Icons/IcoSearch'
+import IcoSearch from '../Icons/IcoSearch'
 
 export default function SearchInput() {
   const router = useRouter()

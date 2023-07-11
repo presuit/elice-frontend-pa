@@ -1,9 +1,9 @@
 import { QueryClient, dehydrate } from '@tanstack/react-query'
 import { GetServerSideProps } from 'next'
 import { OrgCourseList } from '@/api'
+import FilterChips from '@/components/CourseFiltering/FilterChips'
+import SearchInput from '@/components/CourseFiltering/SearchInput'
 import CourseList from '@/components/CourseList'
-import FilterChips from '@/components/FilterChips'
-import SearchInput from '@/components/SearchInput'
 import { DEFAULT_COURSE_COUNT } from '@/constants/courseCard'
 
 export default function Home() {
