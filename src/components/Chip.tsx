@@ -1,15 +1,15 @@
 import { OrgCourseFilterConditionType } from "@/api/types";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
-interface IProps {
+interface Props {
   id: string;
   name: string;
   filterCondition: OrgCourseFilterConditionType;
 }
 
-export default function Chip({ id, name, filterCondition }: IProps) {
+export default function Chip({ id, name, filterCondition }: Props) {
   const router = useRouter();
   const [active, setActive] = useState(false);
 
@@ -32,10 +32,10 @@ export default function Chip({ id, name, filterCondition }: IProps) {
     } else {
       url.searchParams.append(filterCondition, id);
     }
-    router.replace(url);
+    router.replace(url, undefined, { shallow: true });
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const queryValues = router.query[filterCondition];
 
     if (queryValues) {
