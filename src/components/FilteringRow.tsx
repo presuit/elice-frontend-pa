@@ -1,6 +1,5 @@
 import { ELICE_FILTER_CONDITION_MAP } from "@/api/constants";
 import { OrgCourseFilterConditionType } from "@/api/types";
-import { FILTER_NAME } from "@/constants/filter";
 import Chip from "./Chip";
 
 interface IProps {
@@ -27,7 +26,7 @@ export default function FilteringRow({ name, filterCondition }: IProps) {
                 key={id}
                 id={id}
                 filterCondition={filterCondition}
-                name={FILTER_NAME[+id - 1]}
+                name={ELICE_FILTER_CONDITION_MAP[filterCondition][id].name}
               />
             );
           })}

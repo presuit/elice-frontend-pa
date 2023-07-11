@@ -45,6 +45,6 @@ export type OrgCourseFilterConditionType =
 
 export type EliceFilterConditionsMapType = {
   [key in OrgCourseFilterConditionType]: {
-    [key: string]: string;
+    [key: string]: { name: string; value: string };
   };
 };

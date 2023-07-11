@@ -15,7 +15,7 @@ export function convertFilterConditions(
   ) {
     const mappingData = ELICE_FILTER_CONDITION_MAP[key][value];
     if (mappingData) {
-      const data = JSON.parse(mappingData);
+      const data = JSON.parse(mappingData.value);
       if (Array.isArray(data)) filterConditions.$or.push(...data);
       else filterConditions.$or.push(data);
     }
