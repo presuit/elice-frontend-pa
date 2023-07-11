@@ -1,41 +1,15 @@
+import { NextApiRequest, NextApiResponse } from "next";
 import {
   DEFAULT_ELICE_FILTER_CONDITIONS,
   ELICE_FILTER_CONDITION_MAP,
 } from "./constants";
-import { ApiFilterConditionObj, OrgCourseFilterConditionType } from "./types";
-
-export function convertFilterConditions(
-  key: OrgCourseFilterConditionType,
-  value: string | string[]
-) {
-  const filterConditions: { $or: object[] } = { $or: [] };
-  function convertQueryToEliceFilterConditions(
-    key: OrgCourseFilterConditionType,
-    value: string
-  ) {
-    const mappingData = ELICE_FILTER_CONDITION_MAP[key][value];
-    if (mappingData) {
-      const data = JSON.parse(mappingData.value);
-      if (Array.isArray(data)) filterConditions.$or.push(...data);
-      else filterConditions.$or.push(data);
-    }
-  }
-
-  if (Array.isArray(value)) {
-    const mapLength = Object.keys(ELICE_FILTER_CONDITION_MAP[key]).length;
-    const isEveryOptionChecked = mapLength === value.length;
-
-    if (!isEveryOptionChecked) {
-      value.forEach((item) => {
-        convertQueryToEliceFilterConditions(key, item);
-      });
-    }
-  } else {
-    convertQueryToEliceFilterConditions(key, value);
-  }
-
-  return filterConditions;
-}
+import {
+  ApiFilterConditionObj,
+  OrgCourseFilterConditionType,
+  OrgCourseListErrorResponses,
+  OrgCourseListResponses,
+} from "./types";
+import Cors from "cors";
 
 export function getEliceFilterConditions(filter_conditions: string) {
   let filterConditions: {
@@ -88,4 +62,82 @@ export function getEliceFilterConditions(filter_conditions: string) {
   }
 
   return filterConditions;
+}
+
+function getEliceFilterCondition(
+  key: OrgCourseFilterConditionType,
+  value: string
+) {
+  const container = [];
+  const mappingData = ELICE_FILTER_CONDITION_MAP[key][value];
+  if (mappingData) {
+    const data = JSON.parse(mappingData.value);
+    if (Array.isArray(data)) container.push(...data);
+    else container.push(data);
+  }
+
+  return container;
+}
+
+export function convertFilterConditions(
+  key: OrgCourseFilterConditionType,
+  value: string | string[]
+) {
+  const filterConditions: { $or: object[] } = { $or: [] };
+
+  if (Array.isArray(value)) {
+    const mapLength = Object.keys(ELICE_FILTER_CONDITION_MAP[key]).length;
+    const isEveryOptionChecked = mapLength === value.length;
+
+    if (!isEveryOptionChecked)
+      value.forEach((item) => {
+        filterConditions.$or.push(...getEliceFilterCondition(key, item));
+      });
+  } else {
+    filterConditions.$or.push(...getEliceFilterCondition(key, value));
+  }
+
+  return filterConditions;
+}
+
+export function isOrgCourseErrorResponses(
+  data: OrgCourseListResponses | OrgCourseListErrorResponses
+): data is OrgCourseListErrorResponses {
+  if ("fail_code" in data) {
+    return true;
+  }
+  return false;
+}
+
+const cors = Cors({
+  methods: ["GET"],
+});
+
+function runMiddleware(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  fn: Function
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: any) => {
+      if (result instanceof Error) {
+        return reject(result);
+      }
+
+      return resolve(result);
+    });
+  });
+}
+
+export function withCorsHandler(
+  fn: (req: NextApiRequest, res: NextApiResponse) => Promise<void>
+) {
+  return async function (req: NextApiRequest, res: NextApiResponse) {
+    try {
+      await runMiddleware(req, res, cors);
+      await fn(req, res);
+    } catch (error) {
+      throw error;
+    }
+  };
 }
