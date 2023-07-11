@@ -1,5 +1,5 @@
-import { IconProps } from "@/types/icon";
-import classNames from "classnames";
+import classNames from 'classnames'
+import { IconProps } from '@/types/icon'
 
 export default function IcoChevronLeft({ classname }: IconProps) {
   return (
@@ -9,13 +9,9 @@ export default function IcoChevronLeft({ classname }: IconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={classNames("w-4 h-4", classname)}
+      className={classNames('h-4 w-4', classname)}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 19.5L8.25 12l7.5-7.5"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
     </svg>
-  );
+  )
 }

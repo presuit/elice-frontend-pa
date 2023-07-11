@@ -1,5 +1,5 @@
-import { IconProps } from "@/types/icon";
-import classNames from "classnames";
+import classNames from 'classnames'
+import { IconProps } from '@/types/icon'
 
 export default function IcoGraphSquare({ classname }: IconProps) {
   return (
@@ -9,7 +9,7 @@ export default function IcoGraphSquare({ classname }: IconProps) {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={classNames("w-4 h-4", classname)}
+      className={classNames('h-4 w-4', classname)}
     >
       <path
         strokeLinecap="round"
@@ -17,5 +17,5 @@ export default function IcoGraphSquare({ classname }: IconProps) {
         d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z"
       />
     </svg>
-  );
+  )
 }

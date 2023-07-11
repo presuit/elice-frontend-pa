@@ -1,4 +1,4 @@
-import FilteringRow from "./FilteringRow";
+import FilteringRow from './FilteringRow'
 
 export default function FilterChips() {
   return (
@@ -10,5 +10,5 @@ export default function FilterChips() {
       <FilteringRow name="언어" filterCondition="programmingLanguage" />
       <FilteringRow name="가격" filterCondition="price" />
     </div>
-  );
+  )
 }
