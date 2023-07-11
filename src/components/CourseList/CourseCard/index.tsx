@@ -2,7 +2,7 @@ import CourseMetaData from "./CourseMetaData";
 import CourseMetaDataWithIcons from "./CourseMetaDataWithIcons";
 import PriceLabel from "./PriceLabel";
 
-interface IProps {
+interface Props {
   taglist: string[];
   title: string;
   shortDescription: string;
@@ -18,9 +18,9 @@ export default function CourseCard({
   shortDescription,
   taglist,
   title,
-}: IProps) {
+}: Props) {
   return (
-    <div className="w-full h-[338px] px-6 py-7 rounded-lg bg-white border border-filtering-title-border/75 overflow-hidden flex flex-col justify-between">
+    <div className="w-full h-[338px] px-6 py-7 rounded-lg bg-white overflow-hidden flex flex-col justify-between">
       <div>
         <CourseMetaData
           title={title}

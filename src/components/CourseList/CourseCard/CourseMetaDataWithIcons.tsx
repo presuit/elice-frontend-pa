@@ -27,7 +27,7 @@ export default function CourseMetaDataWithIcons({
         style={{
           backgroundImage: `url(${logoFileUrl})`,
         }}
-        className="absolute top-0 right-0 w-[52px] aspect-square bg-contain"
+        className="absolute top-0 right-0 w-[52px] h-[52px] bg-contain"
       />
     </div>
   );

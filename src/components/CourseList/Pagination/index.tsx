@@ -33,7 +33,7 @@ function renderPages({ maxPage, page, setPage }: Props) {
   );
 
   const BUTTON_BASE_STYLE =
-    "w-6 aspect-square rounded-[.25rem] py-[1px] px-[6px] text-sm";
+    "w-6 h-6 rounded-[.25rem] py-[1px] px-[6px] text-sm";
 
   return (
     <>
