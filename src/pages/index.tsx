@@ -1,7 +1,10 @@
+import { OrgCourseList } from "@/api";
 import CourseList from "@/components/CourseList";
 import FilterChips from "@/components/FilterChips";
 import SearchInput from "@/components/SearchInput";
-import { Suspense } from "react";
+import { DEFAULT_COURSE_COUNT } from "@/constants/courseCard";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
+import { GetServerSideProps } from "next";
 
 export default function Home() {
   return (
@@ -18,15 +21,28 @@ export default function Home() {
         {/* contents */}
         <section className="mt-3">
           <h2 className="sr-only">과목 리스트</h2>
-          <Suspense
-            fallback={
-              <div className="text-5xl font-bold text-black">Loading...</div>
-            }
-          >
-            <CourseList />
-          </Suspense>
+          <CourseList />
         </section>
       </main>
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(["course", "list", query, 1], {
+    queryFn: () =>
+      OrgCourseList.getOrgCourseList({
+        count: DEFAULT_COURSE_COUNT,
+        offset: 0,
+        filter_conditions: JSON.stringify(query),
+      }),
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};

@@ -14,7 +14,7 @@ export default function CourseList() {
   const [page, setPage] = useState(PAGINATION_MINIMUM_PAGE);
   const router = useRouter();
   const scrollRef = usePageTriggerScroll(page);
-  const { data } = useCourseList({
+  const { data, isLoading } = useCourseList({
     page,
     filterConditions: router.query,
   });
@@ -22,6 +22,10 @@ export default function CourseList() {
   useEffect(() => {
     setPage(PAGINATION_MINIMUM_PAGE);
   }, [router.query]);
+
+  if (isLoading) {
+    return <></>;
+  }
 
   if (!data || data.course_count === 0 || data.courses.length === 0) {
     return <NotFound />;
