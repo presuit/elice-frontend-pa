@@ -1,37 +1,28 @@
-import { ELICE_FILTER_CONDITION_MAP } from "@/api/constants";
-import { OrgCourseFilterConditionType } from "@/api/types";
-import Chip from "./Chip";
+import Chip from './Chip'
+import { ELICE_FILTER_CONDITION_MAP } from '@/api/constants'
+import { OrgCourseFilterConditionType } from '@/api/types'
 
 interface Props {
-  name: string;
-  filterCondition: OrgCourseFilterConditionType;
+  name: string
+  filterCondition: OrgCourseFilterConditionType
 }
 
 export default function FilteringRow({ name, filterCondition }: Props) {
-  const chipIdList = Object.keys(ELICE_FILTER_CONDITION_MAP[filterCondition]);
+  const chipIdList = Object.keys(ELICE_FILTER_CONDITION_MAP[filterCondition])
 
   return (
     <section className="group">
       <h3 className="sr-only">{name}</h3>
-      <div className="flex bg-white border-b border-l border-r border-filtering-title-border group-first-of-type:border-t">
-        <div className="min-w-[6rem] py-[.875rem] px-4 bg-filtering-title-background border-r inline-flex">
-          <span className="text-xs text-filtering-title-text font-bold">
-            {name}
-          </span>
+      <div className="flex border-b border-l border-r border-filtering-title-border bg-white group-first-of-type:border-t">
+        <div className="inline-flex min-w-[6rem] border-r bg-filtering-title-background px-4 py-[.875rem]">
+          <span className="text-xs font-bold text-filtering-title-text">{name}</span>
         </div>
-        <div className="px-2 flex flex-wrap flex-1">
-          {chipIdList.map((id) => {
-            return (
-              <Chip
-                key={id}
-                id={id}
-                filterCondition={filterCondition}
-                name={ELICE_FILTER_CONDITION_MAP[filterCondition][id].name}
-              />
-            );
+        <div className="flex flex-1 flex-wrap px-2">
+          {chipIdList.map(id => {
+            return <Chip key={id} id={id} filterCondition={filterCondition} name={ELICE_FILTER_CONDITION_MAP[filterCondition][id].name} />
           })}
         </div>
       </div>
     </section>
-  );
+  )
 }
